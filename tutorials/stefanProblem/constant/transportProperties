@@ -16,13 +16,13 @@ FoamFile
 
 phases (water vapour); 
 
-TSat                453.03;   // saturation temperature
+TSat                453.03; 
 
 pSat                1e6;
 
 thermalPhaseChangeTwoPhaseMixture Hardt;
 
-R                   461.0; //
+R                   461.0;
 TSatLocal           false;
 
 sigma               0.04221;
@@ -31,7 +31,7 @@ sigma               0.04221;
 water
 {
     transportModel  Newtonian;
-    nu       nu [0 2 -1 0 0 0 0]       1.702e-07;
+    nu              1.702e-07;
     rho             888.2;
 
 
@@ -43,7 +43,7 @@ water
 vapour
 {
     transportModel  Newtonian;
-    nu         nu [0 2 -1 0 0 0 0]     2.937e-06;
+    nu              2.937e-06;
     rho             5.129;
 
 
