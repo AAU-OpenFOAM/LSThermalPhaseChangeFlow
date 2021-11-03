@@ -16,13 +16,13 @@ FoamFile
 
 phases (water vapour); 
 
-TSat                646;   // saturation temperature
+TSat                646;  
 
 pSat                10;
 
-thermalPhaseChangeTwoPhaseMixture  Hardt;//interfaceHeatResistance;
+thermalPhaseChangeTwoPhaseMixture  Hardt;
 
-R                   461.0; //
+R                   461.0;
 TSatLocal           false;
 
 sigma               1;
@@ -49,7 +49,7 @@ vapour
     nu              $Nu;
     rho            1;
 
-    Cv            1 /* 3.52e5*/;
+    Cv             1;
 
     Cp              1;      
     kappa           0.538;
@@ -70,14 +70,6 @@ LeeCoeffs
   rv                1E3;
   rc                0;
 }
-
-interfaceHeatResistanceCoeffs
-{
-  
-HTC              1E4;
-maxAlphaRate    1;
-spread          3;
-} 
 
 Prt             21.11941115;
 
