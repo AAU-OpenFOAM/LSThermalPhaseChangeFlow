@@ -1,0 +1,65 @@
+#!/bin/sh
+cd ${0%/*} || exit 1                        # Run from this directory
+. $WM_PROJECT_DIR/bin/tools/RunFunctions    # Tutorial run functions.
+. $WM_PROJECT_DIR/bin/tools/CleanFunctions  # Tutorial clean functions
+
+
+interfaceMethods="
+isoAdvector
+MULES
+"
+
+NNu="0.01"
+
+MAXX="128"
+
+NC="20"
+
+for XNu in $NNu
+    do
+        echo "Setting number of cores to $XNu"
+        sed "s/XNu/$XNu/g" constant/transportProperties.template \
+        > constant/transportProperties    
+
+        for XN in $NC
+            do
+                echo "Setting number of cores to $XN"
+                sed "s/XN/$XN/g" system/decomposeParDict.template \
+                > system/decomposeParDict
+                
+                for XM in $MAXX
+                    do
+                        echo "Setting grid number in X direction to $XM"
+                        sed "s/XM/$XM/g" system/blockMeshDict.template \
+                        > system/blockMeshDict
+                        
+                        for method in $interfaceMethods
+                            do
+
+                                echo "Setting interface tracking method to $method"
+
+                                sed -e "s/INTERFACE_METHOD/$method/g" \
+                                system/fvSolution.template \
+                                > system/fvSolution
+                                
+                                
+                                
+                                touch foam.foam
+                                restore0Dir
+                                runApplication blockMesh
+                                runApplication setFields
+                                runApplication decomposePar
+                                runParallel $(getApplication)
+                                                        
+
+                                methodDir="$method$XScheme$XM"
+                                mkdir "$method$XScheme$XM"
+                                mv -f  0 *.dat foam.foam log.*  proc* postPro*  "$method$XScheme$XM"
+                                cleanCase0
+                            done
+                    done
+           done
+    done
+done
+
+#------------------------------------------------------------------------------

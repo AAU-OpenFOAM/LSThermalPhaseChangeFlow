@@ -1,0 +1,98 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2006                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+phases (water vapour); 
+
+TSat                646;   // saturation temperature
+
+pSat                10;
+
+thermalPhaseChangeTwoPhaseMixture  Hardt;//interfaceHeatResistance;
+
+R                   461.0; //
+TSatLocal           false;
+
+sigma               1;
+
+Nu                  0.01;
+
+water
+{
+    transportModel  Newtonian;
+    nu              $Nu;
+    rho             1;
+
+
+    Cp              1;
+    Cv             1;
+
+    kappa           0.545;
+    hf              0;
+}
+
+vapour
+{
+    transportModel  Newtonian;
+    nu              $Nu;
+    rho            1;
+
+    Cv            1 /* 3.52e5*/;
+
+    Cp              1;      
+    kappa           0.538;
+    hf              276.4e03;
+}
+
+HardtCoeffs
+{
+  
+  Cv                0.1; 
+  rv                1;
+  rc                0;
+ 
+}
+
+LeeCoeffs
+{
+  rv                1E3;
+  rc                0;
+}
+
+interfaceHeatResistanceCoeffs
+{
+  
+HTC              1E4;
+maxAlphaRate    1;
+spread          3;
+} 
+
+Prt             21.11941115;
+
+deltaX          5e-6;
+
+
+surfaceForces
+{
+  sigma 1;
+  curvatureModel RDF;
+  accelerationModel gravity;
+  gravity (0 0 0);
+  deltaFunctionModel alphaCSF;
+}
+
+
+
+// ************************************************************************* //
