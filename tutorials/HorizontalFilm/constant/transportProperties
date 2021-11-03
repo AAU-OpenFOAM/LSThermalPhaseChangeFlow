@@ -1,0 +1,81 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2006                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+phases (water vapour); // FC-72
+
+TSat                453.03;   // saturation temperature
+
+pSat                1.00E+006;
+
+thermalPhaseChangeTwoPhaseMixture Hardt;//constant;
+
+R                   461.0; //
+TSatLocal           false;
+
+sigma               0.042217;
+ 
+
+water
+{
+    transportModel  Newtonian;
+    nu          nu [0 2 -1 0 0 0 0]    1.69E-007;
+    rho             887.13;
+
+
+    Cp              4.40E+003;
+    kappa           0.6733;
+    hf              0;
+}
+
+vapour
+{
+    transportModel  Newtonian;
+    nu       nu [0 2 -1 0 0 0 0]       2.92E-006;
+    rho             5.145;
+
+
+    Cp              4.40E+003;      // FC72 vapour
+    kappa           0.0364;
+    hf              2014580;
+}
+
+HardtCoeffs
+{
+  
+  Cv                1; 
+  rv                0;
+  rc                1;
+ 
+}
+
+LeeCoeffs
+{
+  rv                0;
+  rc              1E5;
+}
+	
+FourierCoeffs
+{
+  
+  r              1E5; 
+  type	       invLinear;//
+}
+
+
+deltaX   1E-6;
+
+
+// ************************************************************************* //
