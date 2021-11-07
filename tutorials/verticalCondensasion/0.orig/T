@@ -14,7 +14,6 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 dimensions      [0 0 0 1 0 0 0];
-
 internalField   uniform 646;
 
 boundaryField
@@ -22,13 +21,13 @@ boundaryField
     up
     {
         type            fixedValue;
-        value           uniform 646;
+        value           $internalField;
     }
     down
     {
         type            inletOutlet;
-        inletValue      uniform 646;
-        value           uniform 646;
+        inletValue      $internalField;
+        value           $internalField;
     }
     left
     {
@@ -38,14 +37,12 @@ boundaryField
     freeStream
     {
         type            inletOutlet;
-        inletValue      uniform 646;
-        value           uniform 646;
+        inletValue      $internalField;
+        value           $internalField;
     }
     frontAndBack
     {
         type            empty;
     }
-
 }
-
 // ************************************************************************* //
