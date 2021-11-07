@@ -21,41 +21,39 @@ ddtSchemes
 
 gradSchemes
 {
-    default         Gauss linear;
+     default                                Gauss linear;
 }
 
 divSchemes
 {
-    div(phi,alpha) /*Gauss PLIC interfaceCompression vanLeer 1*/ Gauss interfaceCompression;
-    div(phirb,alpha) Gauss interfaceCompression;
-    div(rhoPhi,U)      Gauss limitedLinearV 1;
-        div(rhoPhiH,U)  Gauss limitedLinearV 1;
-
-    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
-    div(rhoCpPhi,T) Gauss vanLeer;
-    div(phi,T) Gauss linear;
-
-    div((interpolate(cp)*rhoPhi),T) Gauss linear;
+    div(phi,alpha)                          Gauss interfaceCompression;
+    div(phirb,alpha)                        Gauss interfaceCompression;
+    div(rhoPhi,U)                           Gauss limitedLinearV 1;
+    div(rhoPhiH,U)                          Gauss limitedLinearV 1;
+    div(((rho*nuEff)*dev2(T(grad(U)))))     Gauss linear;
+    div(rhoCpPhi,T)                         Gauss vanLeer;
+    div(phi,T)                              Gauss linear;
+    div((interpolate(cp)*rhoPhi),T)         Gauss linear;
 }
 
 laplacianSchemes
 {
-    default        Gauss linear uncorrected;
+    default                                 Gauss linear uncorrected;
 }
 
 interpolationSchemes
 {
-    default         linear;
+    default                                 linear;
 }
 
 snGradSchemes
 {
-    default         uncorrected;
+    default                                 uncorrected;
 }
 
 fluxRequired
 {
-    default         no;
+    default                                 no;
     p_rgh;
     pd;
     pcorr;
