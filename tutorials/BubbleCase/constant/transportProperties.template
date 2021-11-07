@@ -17,9 +17,7 @@ FoamFile
 phases (water vapour); 
 TSat                646;
 pSat                10;
-
 thermalPhaseChangeTwoPhaseMixture  Hardt;
-
 R                   461.0;
 TSatLocal           false;
 sigma               1;
@@ -31,7 +29,6 @@ water
     nu              $Nu;
     rho             1;
     Cp              1;
-    Cv              1;
     kappa           0.545;
     hf              0;
 }
@@ -41,7 +38,6 @@ vapour
     transportModel  Newtonian;
     nu              $Nu;
     rho             1;
-    Cv              1;
     Cp              1;      
     kappa           0.538;
     hf              276.4e03;
@@ -60,7 +56,5 @@ LeeCoeffs
   rc                0;
 }
 
-deltaX          5e-6;
-
-
+deltaX              5e-6;
 // ************************************************************************* //
