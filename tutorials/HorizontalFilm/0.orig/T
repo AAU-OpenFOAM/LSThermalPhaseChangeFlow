@@ -17,7 +17,6 @@ dimensions      [0 0 0 1 0 0 0];
 
 internalField   uniform 453.03;
 
-
 boundaryField
 {
     right
