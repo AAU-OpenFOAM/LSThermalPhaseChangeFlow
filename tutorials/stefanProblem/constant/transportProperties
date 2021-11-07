@@ -14,27 +14,19 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-phases (water vapour); 
-
+phases              (water vapour); 
 TSat                453.03; 
-
 pSat                1e6;
-
 thermalPhaseChangeTwoPhaseMixture Hardt;
-
 R                   461.0;
 TSatLocal           false;
-
 sigma               0.04221;
  
-
 water
 {
     transportModel  Newtonian;
     nu              1.702e-07;
     rho             888.2;
-
-
     Cp              2687;
     kappa           0.6718;
     hf              0;
@@ -45,8 +37,6 @@ vapour
     transportModel  Newtonian;
     nu              2.937e-06;
     rho             5.129;
-
-
     Cp              2687;      
     kappa           0.03488;
     hf              2015000;
@@ -54,11 +44,9 @@ vapour
 
 HardtCoeffs
 {
-  
   Cv                1; 
   rv                1;
   rc                0;
- 
 }
 
 LeeCoeffs
@@ -67,7 +55,5 @@ LeeCoeffs
   rc                0;
 }
 
-
 deltaX  2e-5;
-
 // ************************************************************************* //
