@@ -9,8 +9,7 @@ isoAdvector
 MULES
 "
 
-# MAXX="10 20 30 40 50 60 80 90 100 120 150 180 25 75 125 175"
-MAXX="50 100"
+MAXX="25 75 125 175"
 
 NC="16"
 
@@ -46,7 +45,7 @@ for XN in $NC
                         methodDir="$method$XM"
                         mkdir "$method$XM"
                         cp -r system constant "$method$XM"
-                        mv -f  *.dat log.* foam.foam postProcessing 0 0.9 1 "$method$XM"
+                        mv -f  *.dat log.* foam.foam postProcessing "$method$XM"
                         cleanCase0
                         done
             done
