@@ -15,7 +15,6 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 1 -1 0 0 0 0];
-
 internalField   uniform (0 0 0);
 
 boundaryField
@@ -23,30 +22,27 @@ boundaryField
     up
     {
         type            pressureInletVelocity;
-        value           uniform (0 0 0);
+        value           $internalField;
     }
     down
     {
         type            inletOutlet;
-        inletValue	    uniform (0 0 0);
-        value           uniform (0 0 0);
+        inletValue	    $internalField;
+        value           $internalField;
     }
     left
     {
         type            fixedValue;
-        value           uniform (0 0 0);
+        value           $internalField;
     }
     freeStream
     {
         type            pressureInletVelocity;
-        value           uniform (0 0 0);
+        value           $internalField;
     }
     frontAndBack
     {
         type            empty;
     }
-
 }
-
-
 // ************************************************************************* //
