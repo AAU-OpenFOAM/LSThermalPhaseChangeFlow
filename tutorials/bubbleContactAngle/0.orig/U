@@ -16,7 +16,6 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 1 -1 0 0 0 0];
-
 internalField   uniform (0 0 0);
 
 boundaryField
@@ -26,13 +25,10 @@ boundaryField
         type            fixedValue;
         value           uniform (0 0 0);
     }
-    
     FarStream
     {
         type            zeroGradient;
     }
-
-
     symmetryPlanes
     {
         type            symmetry;
@@ -42,8 +38,5 @@ boundaryField
     {
         type            empty;
     }
-
 }
-
-
 // ************************************************************************* //
