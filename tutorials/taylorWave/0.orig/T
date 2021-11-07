@@ -15,56 +15,15 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 0 0 1 0 0 0];
-
 internalField   uniform 646.;
-// internalField    #codeStream
-// {
-// 	codeInclude
-// 	#{
-// 		#include "fvCFD.H"
-// 	#};
-//         
-// 	codeOptions
-// 	#{
-// 		-I$(LIB_SRC)/finiteVolume/lnInclude \
-// 		-I$(LIB_SRC)/meshTools/lnInclude
-// 	#};
-// 
-// 	codeLibs
-// 	#{
-// 		-lmeshTools \
-// 		-lfiniteVolume
-// 	#};
-// 	code
-// 	#{
-//        	const IOdictionary& d = static_cast<const IOdictionary&>(dict);
-// 		const fvMesh& mesh = refCast<const fvMesh>(d.db());
-// 		scalar lambda = 2.29922953E-03;
-//         scalar kg_ = 0.538;
-//         scalar deltaT = 10.;
-//         scalar Twall = 646.;
-//         scalar Tliquid = 656.;
-//         scalarField T(mesh.nCells(), Tliquid);
-// 		forAll(T, i)
-// 		{
-// 			const scalar x = mesh.C()[i][0];
-// 			const scalar y = mesh.C()[i][1];
-// 			if ( y <= lambda/128*(4+cos(2*constant::mathematical::pi*x/lambda)) )
-// 			{
-// 				T[i] = -deltaT*y / (lambda/128 * (4 + cos(2*constant::mathematical::pi*x/lambda))) + Twall;
-// 			}
-// 		}
-// 		T.writeEntry("", os);
-// 	#};
-// };
 
 boundaryField
 {
     up
     {
         type            inletOutlet;
-        inletValue      uniform 646.;
-        value           uniform 646.;
+        inletValue      $internalField;
+        value           $internalField;
     }
     "wall.*"
     {
@@ -73,7 +32,7 @@ boundaryField
     down
     {
         type            fixedValue;
-        value          uniform 651;
+        value           uniform 651;
     }
     frontAndBack
     {
