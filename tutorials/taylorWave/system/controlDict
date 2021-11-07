@@ -16,37 +16,21 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 application     LSThermalPhaseChangeFlow;
-
 startFrom       latestTime;
-
 startTime       0;
-
 stopAt          endTime;
-
 endTime         1;
-
 deltaT          1e-18;
-
 writeControl    adjustableRunTime;
-
 writeInterval   0.01;
-
 purgeWrite      0;
-
 writeFormat     ascii;
-
 writePrecision  6;
-
 writeCompression off;
-
 timeFormat      general;
-
 timePrecision   8;
-
 runTimeModifiable yes;
-
 adjustTimeStep  yes;
-
 maxCo           0.1;
 maxAlphaCo      0.1;
 maxDeltaT       0.1;
@@ -80,8 +64,8 @@ functions
         // Code
         codeWrite
         #{        
-	        scalar sigma_ = 0.07e-03; 
-	        scalar rhog_ = 242.7;
+	    scalar sigma_ = 0.07e-03; 
+	    scalar rhog_ = 242.7;
             scalar rhol_ = 402.4;
             scalar g_ = 9.81;
             scalar Hlg_ = 276.4e03;
@@ -118,15 +102,7 @@ functions
             Nusselt.boundaryFieldRef()[down] = lambda_/DT_*T.boundaryField()[down].snGrad();
             scalar area = gSum(mesh().magSf().boundaryField()[down]);
             scalar avgNusselt = gSum(Nusselt.boundaryField()[down] * mesh().magSf().boundaryField()[down])/area;
-            scalar avgNusselt2 = gSum(Nusselt.boundaryField()[down])/110.;
             Info << "Space-averaged Nusselt lambda = " << avgNusselt << "\n" << endl; 
-                        Info << "Space-averaged Nusselt lambda2 = " << avgNusselt2 << "\n" << endl; 
-
-//         Info << "NuAve = "
-//         <<  average(Nusselt.boundaryField()[down]).value()
-//         << "  Min(NU) = " << min(Nusselt.boundaryField()[down]).value()
-//         << "  Max(NU) = " << max(Nusselt.boundaryField()[down]).value()
-//         << endl;
         #};
     }   
 }
