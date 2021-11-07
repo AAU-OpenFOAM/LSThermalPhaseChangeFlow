@@ -13,10 +13,10 @@ FoamFile
     object      decomposeParDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-N 20;
-numberOfSubdomains  $N;
+N                       20;
+numberOfSubdomains      $N;
 
-method          scotch;
+method                  scotch;
 
 coeffs
 {
