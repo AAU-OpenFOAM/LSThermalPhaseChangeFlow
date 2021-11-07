@@ -15,30 +15,24 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [1 -1 -2 0 0 0 0];
-
 internalField   uniform 1e6;
 
 boundaryField
 {
-
   faceWall
   {
       type            fixedFluxPressure;
   }
-
   outlet
   {
-      //type            fixedValue;
       type            totalPressure;
       rho             rho;
       p0              uniform 1e6;
       value           uniform 1e6;
   }
-
   frontAndBackAndUpAndDown
   {
       type            empty;
   }
 }
-
 // ************************************************************************* //
