@@ -19,38 +19,19 @@ FoamFile
 defaultFieldValues
 (
     volScalarFieldValue alpha.water 1
-    
-    
 );
 
 regions
 (
     sphereToCell
     {
-        origin (0 0 1);
-        radius .5;
+        origin          (0 0 1);
+        radius          0.5;
         fieldValues
         (
-            volScalarFieldValue alpha.water 0
-            
-            
+            volScalarFieldValue alpha.water 0  
         );
     }
-    
-//         cylinderToCell
-//     {
-//         p1 (0 0 2);
-//         p2 (0 0 0);
-// 
-//         radius 1;
-//         fieldValues
-//         (
-//             volScalarFieldValue alpha.water 0
-//             
-//             
-//         );
-//     }
-
 );
 
 // ************************************************************************* //
