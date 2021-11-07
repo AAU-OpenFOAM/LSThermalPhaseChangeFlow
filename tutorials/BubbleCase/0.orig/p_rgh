@@ -21,19 +21,14 @@ internalField   uniform 1e-20;
 
 boundaryField
 {
-
     FarStream
     {
 		type           zeroGradient;
     }
-
-
+    
     symmetryPlanes
     {
         type            symmetry;
-    }
-    
+    }    
 }
-
-
 // ************************************************************************* //
