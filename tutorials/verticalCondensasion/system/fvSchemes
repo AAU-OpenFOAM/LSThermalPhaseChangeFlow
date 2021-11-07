@@ -16,49 +16,47 @@ FoamFile
 
 ddtSchemes
 {
-    default backward;
+    default                                 backward;
 }
 
 gradSchemes
 {
-    default         Gauss linear;
+    default                                 Gauss linear;
 }
 
 divSchemes
 {
-    div(phi,alpha)  Gauss vanLeer;
-    div(phirb,alpha) Gauss interfaceCompression;
-    div(rhoPhi,U)      Gauss linearUpwind grad(U);
-    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
-    div(rhoCpPhi,T) Gauss upwind;
-    div(phi,T) Gauss linearUpwind gradT;
-
-    div((interpolate(cp)*rhoPhi),T) Gauss linear;
+    div(phi,alpha)                          Gauss vanLeer;
+    div(phirb,alpha)                        Gauss interfaceCompression;
+    div(rhoPhi,U)                           Gauss limitedLinearV 1;
+    div(((rho*nuEff)*dev2(T(grad(U)))))     Gauss linear;
+    div(rhoCpPhi,T)                         Gauss vanLeer;
+    div(phi,T)                              Gauss linear;
+    div((interpolate(cp)*rhoPhi),T)         Gauss linear;
 }
 
 laplacianSchemes
 {
-    default        Gauss linear corrected;
+    default                                 Gauss linear corrected;
 }
 
 interpolationSchemes
 {
-    default         linear;
+    default                                 linear;
 }
 
 snGradSchemes
 {
-    default         corrected;
+    default                                 corrected;
 }
 
 fluxRequired
 {
-    default         no;
-    p;
-    p_rgh;	
+    default                                 no;
+    p_rgh;
+    pd;
     pcorr;
     alpha1;
-    
+    alpha.water;
 }
-
 // ************************************************************************* //
