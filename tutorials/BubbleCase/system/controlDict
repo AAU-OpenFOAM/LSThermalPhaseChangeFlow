@@ -50,15 +50,11 @@ adjustTimeStep  yes;
 maxCo           1;
 maxAlphaCo      1;
 
-maxDeltaT       .005;
+maxDeltaT       0.005;
 
 functions
 {
   
-
-    // ************************************************ //
-    // **** Pressure profiles along sampling lines **** //
-    // ************************************************ //
     pressure_profiles
     {
         type                sets;
@@ -121,16 +117,11 @@ functions
             }
         );
 
-
         fields
         (
             p
         );
     }
-
-    // ************************************************ //
-    // **** monitor of min/max values ofvelocity magnitude **** //
-    // ************************************************ //
 
     minMaxMagnitude
     {
@@ -145,14 +136,5 @@ functions
         mode            magnitude;
         fields          ( U );
     }
-
-
 }
-
-
-
-
-// ************************************************************************* //
-
-
 // ************************************************************************* //
