@@ -16,37 +16,21 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 application     LSThermalPhaseChangeFlow;
-
 startFrom       latestTime;
-
 startTime       0;
-
 stopAt          endTime;
-
 endTime         50;
-
 deltaT          1e-7;
-
 writeControl    adjustableRunTime;
-
 writeInterval   10;
-
 purgeWrite      0;
-
 writeFormat     ascii;
-
 writePrecision  6;
-
 writeCompression off;
-
 timeFormat      general;
-
 timePrecision   6;
-
 runTimeModifiable yes;
-
 adjustTimeStep  yes;
-
 maxCo           0.5;
 maxAlphaCo      0.5;
 maxDeltaT       2e-4;
@@ -122,7 +106,6 @@ functions
     
     #includeFunc components(U)
     #includeFunc "writeCellCentres"
-
     
     line1
     {
@@ -146,7 +129,6 @@ functions
         );
         fields  (T);
     }
-    
 }
 
 // ************************************************************************* //
