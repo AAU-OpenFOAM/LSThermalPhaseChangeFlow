@@ -48,7 +48,6 @@ functions
         enabled true;
     }
     
-    
     interfaceHeight1
     {
         // Mandatory entries
