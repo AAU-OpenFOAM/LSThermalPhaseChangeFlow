@@ -15,28 +15,22 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 0 0 0 0 0 0];
-
 internalField   uniform 0.0;
 
 boundaryField
 {
-
    right
    {
        type	        zeroGradient; 
    }
-
    left
    {
         type        fixedValue;
         value       uniform 1.0
     }
-
    frontAndBackAndUpAndDown
    {
        type         empty; 
     }
-
 }
-
 // ************************************************************************* //
