@@ -43,16 +43,9 @@ for XN in $NC
                         runApplication reconstructPar
 
 
-
-                        
-  
                         methodDir="$method$XM"
                         mkdir "$method$XM"
-                        cpfoam.foam Allrun2 "$method$XM"
-                        mv -f  *.dat  postProcessing  "$method$XM"
-                        
-                        cp -r 0 1 system constant $method$XM
-                        
+                        mv -f  *.dat  postProcessing  "$method$XM"                        
                         cleanCase0
                         done
             done
