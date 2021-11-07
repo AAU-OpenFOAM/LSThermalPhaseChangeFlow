@@ -14,7 +14,6 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 dimensions      [0 0 0 1 0 0 0];
-
 internalField   uniform 453.03;
 
 boundaryField
@@ -24,17 +23,14 @@ boundaryField
         type            fixedValue;
         value           uniform 453.03;	
     }
-    
     left
     {
         type            fixedValue;
         value           uniform 423.03;
     }
-    
     frontAndBackAndUpAndDown
     {
         type            empty;
     }
 }
-
 // ************************************************************************* //
