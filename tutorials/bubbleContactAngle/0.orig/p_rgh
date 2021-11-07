@@ -16,36 +16,25 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [1 -1 -2 0 0 0 0];
-
 internalField   uniform 10;
 
 boundaryField
-{
-    
-        
+{     
     down
     {
         type            zeroGradient;
     }
-
     FarStream
     {
 		type           zeroGradient;
     }
-
-
     symmetryPlanes
     {
         type            symmetry;
     }
-    
-    
     frontAndBack
     {
         type            empty;
-    }
-    
+    }  
 }
-
-
 // ************************************************************************* //
