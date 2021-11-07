@@ -14,8 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-phases (water vapour);
-
+phases              (water vapour);
 TSat                646;  
 pSat                21.9E6;
 thermalPhaseChangeTwoPhaseMixture Hardt;
@@ -57,5 +56,4 @@ LeeCoeffs
 }
 
 deltaX   1;
-
 // ************************************************************************* //
