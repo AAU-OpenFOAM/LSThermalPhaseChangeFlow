@@ -15,9 +15,7 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 scale 0.00001;
-
 D 50;
-
 
 vertices        
 (
@@ -42,8 +40,6 @@ edges
 
 patches         
 (
-  
-
     patch left 
     (
         (0 4 7 3)
@@ -52,7 +48,6 @@ patches
     (
         (2 6 5 1)
     ) 
-
     empty frontAndBackAndUpAndDown 
     (
         (3 7 6 2)
@@ -65,5 +60,4 @@ patches
 mergePatchPairs 
 (
 );
-
 // ************************************************************************* //
