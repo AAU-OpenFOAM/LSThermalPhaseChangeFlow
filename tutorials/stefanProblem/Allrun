@@ -9,7 +9,7 @@ isoAdvector
 MULES
 "
 
-MAXX="50 100"
+MAXX="25 75 125 175"
 
 
         
@@ -33,9 +33,6 @@ MAXX="50 100"
                         runApplication setFields
                         runApplication $(getApplication)
                         
-                        
-
-
                         methodDir="$method$XM"
                         mkdir "$method$XM"
                         mv -f log.* *.dat postProcessing "$method$XM"
