@@ -20,11 +20,9 @@ internalField   uniform 0;
 
 boundaryField
 {
-
     FarStream
     {
         type            zeroGradient;
-
     }
     
     symmetryPlanes
@@ -32,5 +30,4 @@ boundaryField
         type            symmetry;
     }
 }
-
 // ************************************************************************* //
