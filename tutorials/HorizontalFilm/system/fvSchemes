@@ -16,7 +16,7 @@ FoamFile
 
 ddtSchemes
 {
-    default                                 Euler;
+    default                                 backward;
 }
 
 gradSchemes
@@ -37,7 +37,7 @@ divSchemes
 
 laplacianSchemes
 {
-    default                                 Gauss linear uncorrected;
+    default                                 Gauss linear corrected;
 }
 
 interpolationSchemes
@@ -47,7 +47,7 @@ interpolationSchemes
 
 snGradSchemes
 {
-    default                                 uncorrected;
+    default                                 corrected;
 }
 
 fluxRequired
