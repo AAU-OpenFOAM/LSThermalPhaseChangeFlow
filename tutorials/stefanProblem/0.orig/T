@@ -15,27 +15,22 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 0 0 1 0 0 0];
-
 internalField   uniform 453.03;
 
 boundaryField
 {  
-
     faceWall
     {
         type            fixedValue;
         value           uniform 463.03;
     }
-
     outlet
     {
         type            zeroGradient;
     }
-
     frontAndBackAndUpAndDown
     {
         type            empty;
     }
 }
-
 // ************************************************************************* //
