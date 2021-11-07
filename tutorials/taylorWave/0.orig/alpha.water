@@ -16,8 +16,6 @@ FoamFile
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 1;
-
 internalField    #codeStream
 {
 	codeInclude
@@ -46,7 +44,6 @@ internalField    #codeStream
 		{
 			const scalar x = mesh.C()[i][0];
 			const scalar y = mesh.C()[i][1];
-//             const scalar z = mesh.C()[i][2];
 			if ( y <= lambda/128*(4+cos(2*constant::mathematical::pi*x/lambda)/*+cos(2*constant::mathematical::pi*z/lambda)*/) )
 			{
 				alpha[i] = 0.;
