@@ -19,10 +19,8 @@ solvers
     "(alpha.water.*|psi|H)"
     {
         interfaceMethod "INTERFACE_METHOD";
-        
-        
         reconstructionScheme plicRDF; 
-
+        
         // isoAdvector parameters
         vof2IsoTol      1e-8;
         surfCellTol     1e-8;
@@ -59,7 +57,7 @@ solvers
 
     rho
     {
-        solver           diagonal;
+        solver          diagonal;
         tolerance       1e-7;
         relTol          0.1;
     }
@@ -84,8 +82,8 @@ solvers
     {
         solver           GAMG;
         tolerance        1e-9;
-        solver          PCG;
-        preconditioner  DIC;
+        solver           PCG;
+        preconditioner   DIC;
         relTol           0.001;
         smoother         DIC;
     }
@@ -118,7 +116,7 @@ solvers
     "(h|T.*|k|epsilon|R|H)"
     {
         solver           smoothSolver;
-        smoother        symGaussSeidel;
+        smoother         symGaussSeidel;
         tolerance        1e-7;
         relTol           0.;
         minIter          15;
@@ -144,7 +142,7 @@ PIMPLE
 {
     momentumPredictor   yes;
     nCorrectors         3;
-    nOuterCorrectors 1;
+    nOuterCorrectors    1;
     nNonOrthogonalCorrectors 0;
     pRefCell        0;
     pRefValue       0;
