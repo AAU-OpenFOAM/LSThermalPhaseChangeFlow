@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-phases (water vapour); 
+phases              (water vapour); 
 TSat                646; 
 pSat                10;
 thermalPhaseChangeTwoPhaseMixture  Hardt;
