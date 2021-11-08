@@ -3,7 +3,6 @@ cd "${0%/*}" || exit    # Run from this directory
 
 wclean libso thermalIncompressibleTwoPhaseMixture
 wclean libso thermalPhaseChangeTwoPhaseMixtures
-wclean libso psiTwoPhaseProperties
 wclean libso interfacePropertiesLS 
 wclean
 
