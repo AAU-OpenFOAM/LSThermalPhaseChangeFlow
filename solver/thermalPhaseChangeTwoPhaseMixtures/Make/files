@@ -1,6 +1,0 @@
-thermalPhaseChangeTwoPhaseMixture/thermalPhaseChangeTwoPhaseMixture.C
-thermalPhaseChangeTwoPhaseMixture/newThermalPhaseChangeTwoPhaseMixture.C
-Hardt/Hardt.C
-Lee/Lee.C
-
-LIB = $(FOAM_USER_LIBBIN)/libthermalPhaseChangeTwoPhaseMixtures
