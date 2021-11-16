@@ -1,0 +1,4 @@
+psiContactAngle/psiContactAngleTwoPhaseFvPatchScalarField.C
+interfacePropertiesLSH.C
+
+LIB = $(FOAM_USER_LIBBIN)/libinterfacePropertiesLSH
