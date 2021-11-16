@@ -1,0 +1,14 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/wmake/scripts/AllwmakeParseArguments
+
+#------------------------------------------------------------------------------
+wmake src/geometricVoF
+wmake src/surfaceForces
+wmake src/thermalIncompressibleTwoPhaseMixture
+wmake src/thermalPhaseChangeTwoPhaseMixtures
+wmake src/interfacePropertiesLS
+wmake solver
+
+
+#------------------------------------------------------------------------------

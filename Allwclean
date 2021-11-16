@@ -1,0 +1,13 @@
+#!/bin/sh
+cd "${0%/*}" || exit    # Run from this directory
+
+wclean src/geometricVoF
+wclean src/surfaceForces
+wclean src/thermalIncompressibleTwoPhaseMixture
+wclean src/thermalPhaseChangeTwoPhaseMixtures
+wclean src/interfacePropertiesLS
+wclean solver
+./tutorials/Allclean
+
+
+#------------------------------------------------------------------------------
