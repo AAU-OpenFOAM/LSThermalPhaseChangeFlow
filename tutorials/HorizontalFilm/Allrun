@@ -32,14 +32,11 @@ MAXX="25 75 125 175"
                         runApplication setFields
                         runApplication $(getApplication)
             
-
-
                         methodDir="$method$XM"
                         mkdir "$method$XM"
-                        mv -f log.* *.dat postProcessing  "$method$XM"
+                        mv -f log.* postProcessing  "$method$XM"
                         cleanCase0
-                        
-                        
+                       
                         done
             done
 
