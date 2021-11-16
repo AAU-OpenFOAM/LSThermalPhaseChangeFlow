@@ -1,0 +1,122 @@
+#!/bin/sh
+cd ${0%/*} || exit 1                        # Run from this directory
+. $WM_PROJECT_DIR/bin/tools/RunFunctions    # Tutorial run functions.
+. $WM_PROJECT_DIR/bin/tools/CleanFunctions  # Tutorial clean functions
+
+
+interfaceMethods="
+isoAdvector
+MULES
+"
+
+MAXX="25 75 125 175"
+
+        for XM in $MAXX
+            do
+                echo "Setting grid number in X direction to $XM"
+                sed "s/XM/$XM/g" system/blockMeshDict.template \
+                > system/blockMeshDict
+                
+                for method in $interfaceMethods
+                    do
+
+                        echo "Setting interface tracking method to $method"
+
+                        sed -e "s/INTERFACE_METHOD/$method/g" \
+                        system/fvSolution.template \
+                        > system/fvSolution
+
+            
+# Extracting interface location  
+input="$method$XM/postProcessing/interfaceHeight1/0/height.dat"
+output="horizontal_case.dat"
+cat $input |tail -n +6 | awk '{ printf("%.16G %.16G\\\\\n", $1,$2) }' >> $output
+
+
+
+# Extracting interface parameters
+input="$method$XM/postProcessing/interfaceParameters/0/interfaceParameters.dat"
+output="interfaceParameters.dat"
+cat $input | grep -v '^#' | sed -e 's/[()]//g' | awk '{print $1" "$2" "$3" "$4" "$5" "$6}' >> $output
+                        
+                        
+                        
+# Get simulation global data to normalize thickness
+deltaT="30"
+Sc=`grep scale system/blockMeshDict | awk '{print $NF}' | sed -e 's/;//g' | head -1`
+X1=`grep X1 system/blockMeshDict | awk '{print $NF}' | sed -e 's/;//g' | head -1`
+X=`echo $Sc $X1 | awk '{ printf("%.16G\n", $1*$2) }'`
+sigma=`grep 'sigma' constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g'`
+rhog=`grep -m2 rho constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | tail -n1`
+Cpg=`grep -m2 Cp constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | tail -n1`
+kg=`grep -m2 kappa constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | tail -n1`
+hg=`grep -m2 hf constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | tail -n1`
+nug=`grep -m2 nu constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | tail -n1`
+rhol=`grep rho constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | head -1`
+Cpl=`grep Cp constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | head -1`
+kl=`grep kappa constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | head -1`
+nul=`grep nu constant/transportProperties | awk '{print $NF}' | sed -e 's/;//g' | head -1`
+alphal=`echo $kl $Cpl $rhol  | awk '{ printf("%.16G\n",$1/($2*$3)) }'`
+# alphag=`echo $kg $Cpg $rhog  | awk '{ printf("%.16G\n",$1/($2*$3)) }'`
+
+
+
+
+#compute t_sigma
+tsigma=`echo $rhog $sigma $X | awk '{ printf("%.16G\n",sqrt($1*$3*$3*$3/$2)) }'`
+
+
+#compute x* and t*
+input="horizontal_case.dat"
+output="t_star_vs_x_star.dat"
+cat $input | grep -v '^#' | sed -e 's/[()]//g' | awk '{ printf("%.16G %.16G\\\\\n", $1/'"${tsigma}"',$2/'"${X}"') }' >> $output
+
+#calculating Aalytical results for thickness
+input="horizontal_case.dat"
+output="Analytical_horizontal_case.dat"
+cat $input | grep -v '^#' | sed -e 's/[()]//g' | awk '{ printf("%.16G %.16G\\\\\n", $1, '"((2*(${alphal}))/(.5+${hg}/(${Cpl}*${deltaT})))^(.5)"'*($1)^(.5)) }' >> $output
+
+#compute analytical t* and x*
+input="Analytical_horizontal_case.dat"
+output="Analytical_t_star_vs_x_star.dat"
+cat $input | grep -v '^#' | sed -e 's/[()]//g' | awk '{ printf("%.16G %.16G\\\\\n", $1/'"${tsigma}"',$2/'"${X}"') }' >> $output
+
+#compute error
+input1="Analytical_horizontal_case.dat"
+input2="horizontal_case.dat"
+output="error.dat"
+error=`pr -m -t $input1 $input2 | grep -v '^#' | sed -e 's/[()]//g' | awk '{ printf("%.16G\n", (($4-$2)/($2))^2) }' | awk '{ total += $1 } END { print (total/NR)^.5 }'`
+                        
+#Extract clock time
+input="$method$XM/log.$(getApplication)"
+output="$method"_clockTime.txt
+clockTime=`cat $input | grep -e 'ClockTime =' | tail -n1 | sed -e 's/s//g'| awk '{print $NF}'`
+echo $XM $clockTime | awk '{ printf("%.16G %.16G\\\\\n", $1,$2) }' >> $output
+                        
+#Extract error for thickness
+output1="$method"_L2error_intrface.txt
+output2="$method"_error_intrface.txt
+echo $XM $error | awk '{ printf("%.16G %.16G\\\\\n", $1,log($2)/log(10)) }' >> $output1
+echo $XM $error | awk '{ printf("%.16G %.16G\\\\\n", $1,$2) }' >> $output2
+
+#Extract thickness
+input="interfaceParameters.dat"
+output="$method"_thickness.txt
+thickness=$(awk 'NR ==16 {print $6}' $input)
+echo $XM $thickness | awk '{ printf("%.16G %.16G\\\\\n", $1,$2) }' >> $output
+                        
+
+output="overview.txt"
+echo $method $XM $clockTime $error $thickness| awk '{ printf("%-10s %.16G %.16G %.16G %.16G\\\\\n", $1,$2,$3,$4,$5) }' >> $output
+
+
+            
+
+
+                        methodDir="$method$XM"
+                        mv -f  *.dat  "$method$XM"
+                        done
+            done
+
+
+#------------------------------------------------------------------------------

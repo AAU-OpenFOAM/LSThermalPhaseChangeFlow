@@ -1,0 +1,90 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2006                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     LSThermalPhaseChangeFlow;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1;
+
+deltaT          1E-08;
+
+writeControl    adjustableRunTime;
+
+writeInterval   0.1;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+adjustTimeStep  yes;
+
+maxCo           0.1;
+
+maxAlphaCo      0.1;
+
+maxDeltaT       1E-03;
+
+functions
+{
+    interfaceParameters
+    {
+        type interfaceParameters;
+        libs ("libinterfaceParametersFunctionObject.so");
+        phase alpha.water;
+        writeControl    writeTime;
+        writeToFile true;
+        enabled true;
+    }
+
+    isosurfaces
+    {
+        type            surfaces;
+        libs ("libsampling.so");
+        writeControl    writeTime;
+        surfaceFormat   raw;
+        fields          ( alpha.water );
+
+        surfaces
+        (
+          interpolatedIso
+          {
+              type            isoSurface;     
+              isoField        alpha.water;
+              isoValue        0.5;
+              interpolate     true;
+              regularise      false;           
+          }
+        );
+    }
+}
+
+// ************************************************************************* //
