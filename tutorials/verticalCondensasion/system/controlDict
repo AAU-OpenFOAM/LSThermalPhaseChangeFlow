@@ -53,38 +53,5 @@ maxAlphaCo      0.1;
 
 maxDeltaT       1E-03;
 
-functions
-{
-    interfaceParameters
-    {
-        type interfaceParameters;
-        libs ("libinterfaceParametersFunctionObject.so");
-        phase alpha.water;
-        writeControl    writeTime;
-        writeToFile true;
-        enabled true;
-    }
-
-    isosurfaces
-    {
-        type            surfaces;
-        libs ("libsampling.so");
-        writeControl    writeTime;
-        surfaceFormat   raw;
-        fields          ( alpha.water );
-
-        surfaces
-        (
-          interpolatedIso
-          {
-              type            isoSurface;     
-              isoField        alpha.water;
-              isoValue        0.5;
-              interpolate     true;
-              regularise      false;           
-          }
-        );
-    }
-}
 
 // ************************************************************************* //
